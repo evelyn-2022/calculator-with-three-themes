@@ -39,9 +39,7 @@ const App = () => {
             {/* Keyboard */}
             <section className='keypad'>
               <div className='row'>
-                <div className='key number'>
-                  <span>7</span>
-                </div>
+                <div className='key number'>7</div>
                 <div className='key number'>8</div>
                 <div className='key number'>9</div>
                 <div className='key del'>del</div>
