@@ -20,7 +20,7 @@ body {
   --radius-md: 10px;
   --radius-sm: 7px;
   --radius-round: 50%;
-  --transition: all 0.3s linear;
+  --transition: all 0.3s ease-out;
   --grid-gap: 2.2rem;
 }
 
@@ -112,6 +112,7 @@ body {
   margin: auto;
   height: 100vh;
   display: grid;
+  position: relative;
   grid-auto-flow: row;
   grid-template-rows: 1fr minmax(480px, 600px) 1fr;
 }
@@ -119,6 +120,7 @@ body {
 .container {
   grid-row: 2;
   position: relative;
+  width: 100%;
   z-index: 1;
 }
 
@@ -187,22 +189,34 @@ body {
 .keypad {
   width: 100%;
   border-radius: var(--radius-md);
-  padding: 2.6rem;
   z-index: -1;
 }
 
 .screen {
   margin-top: 2.4rem;
   margin-bottom: 1.8rem;
+  max-width: 480px;
+  /* height: auto; */
   min-height: 12rem;
   background-color: var(--bg-screen);
   color: var(--text-heading);
   display: flex;
-  justify-content: end;
-  align-items: center;
+  gap: 0.5rem;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
   font-size: 4.2rem;
+  padding: 1.5rem 2.6rem 1rem;
 }
-
+.previous-operand,
+.current-operand {
+  overflow-wrap: anywhere;
+  text-align: end;
+}
+.previous-operand {
+  opacity: 0.7;
+  font-size: 2rem;
+}
 .keypad {
   background-color: var(--bg-keypad);
   font-size: 3rem;
@@ -211,6 +225,7 @@ body {
   grid-auto-flow: row;
   gap: var(--grid-gap);
   position: relative;
+  padding: 2.6rem;
 }
 
 .row,
@@ -239,9 +254,12 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1;
+  transition: var(--transition);
 }
 .key:hover {
   cursor: pointer;
+}
+.key:active {
   transform: translateY(1px);
   position: relative;
   z-index: 999;
@@ -258,7 +276,7 @@ body {
   border-radius: var(--radius-sm);
 }
 
-.key:hover::after {
+.key:active::after {
   top: -3px;
 }
 
@@ -293,7 +311,6 @@ body {
 .reset:hover::after {
   background-color: var(--key-bg-2-hover);
 }
-
 .equal {
   background-color: var(--key-shadow-3);
   color: var(--key-text-3);
