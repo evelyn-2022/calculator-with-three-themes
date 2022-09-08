@@ -112,7 +112,7 @@ const evaluate = ({ currentOperand, previousOperand, operation }) => {
       computation = bigDecimal.multiply(prev, current);
       break;
     case '÷':
-      computation = bigDecimal.divide(prev, current);
+      computation = Number(bigDecimal.divide(prev, current)).toString();
   }
   return computation.toString();
 };
