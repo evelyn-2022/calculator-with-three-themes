@@ -37,6 +37,16 @@ export const reducer = (state, { type, payload }) => {
           currentOperand: null,
         };
       }
+
+      if (state.currentOperand === '0' && state.operation === '÷')
+        return {
+          ...state,
+          currentOperand: 'ERROR',
+          previousOperand: null,
+          operation: null,
+          overwrite: true,
+        };
+
       return {
         ...state,
         operation: payload.operation,
@@ -63,6 +73,15 @@ export const reducer = (state, { type, payload }) => {
       ) {
         return state;
       }
+
+      if (state.currentOperand === '0' && state.operation === '÷')
+        return {
+          ...state,
+          currentOperand: 'ERROR',
+          previousOperand: null,
+          operation: null,
+          overwrite: true,
+        };
 
       return {
         ...state,
@@ -93,9 +112,6 @@ const evaluate = ({ currentOperand, previousOperand, operation }) => {
       computation = bigDecimal.multiply(prev, current);
       break;
     case '÷':
-      // Todo: divide by zero
-      if (currentOperand === '0') computation = 'Error';
-
       computation = bigDecimal.divide(prev, current);
   }
   return computation.toString();
