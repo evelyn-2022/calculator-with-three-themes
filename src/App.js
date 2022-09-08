@@ -50,9 +50,11 @@ const App = () => {
 
             {/* Screen */}
             <section className='screen'>
-              <div className='previous-operand'>
-                {formatOperand(previousOperand)} {operation}
-              </div>
+              {previousOperand && (
+                <div className='previous-operand'>
+                  {formatOperand(previousOperand)} {operation}
+                </div>
+              )}
               <div className='current-operand'>
                 {formatOperand(currentOperand)}
               </div>
