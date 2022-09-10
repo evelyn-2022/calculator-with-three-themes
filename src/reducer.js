@@ -21,6 +21,10 @@ export const reducer = (state, { type, payload }) => {
       };
 
     case ACTIONS.CHOOSE_OPERATION:
+      if (state.overwrite) {
+        return { ...state, currentOperand: null, overwrite: false };
+      }
+
       if (state.currentOperand == null && state.previousOperand == null) {
         return state;
       }
@@ -38,7 +42,7 @@ export const reducer = (state, { type, payload }) => {
         };
       }
 
-      if (state.currentOperand === '0' && state.operation === '÷')
+      if (Number(state.currentOperand) === 0 && state.operation === '÷')
         return {
           ...state,
           currentOperand: 'ERROR',
@@ -74,7 +78,7 @@ export const reducer = (state, { type, payload }) => {
         return state;
       }
 
-      if (state.currentOperand === '0' && state.operation === '÷')
+      if (Number(state.currentOperand) === 0 && state.operation === '÷')
         return {
           ...state,
           currentOperand: 'ERROR',
