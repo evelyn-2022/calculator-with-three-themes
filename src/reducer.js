@@ -37,7 +37,7 @@ export const reducer = (state, { type, payload }) => {
         return {
           ...state,
           operation: payload.operation,
-          previousOperand: state.currentOperand,
+          previousOperand: Number(state.currentOperand).toString(), // Remove the possible ending . in prevOperand
           currentOperand: null,
         };
       }
